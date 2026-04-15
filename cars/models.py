@@ -17,7 +17,9 @@ class Car(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, related_name='car_brand') # ForeignKey é um campo de chave estrangeira, on_delete=models.PROTECT impede que a marca seja deletada se houver um carro associado a ela, related_name é o nome do relacionamento.
     factory_year = models.IntegerField(blank=True, null=True) # IntegerField é um campo de número inteiro.
     model_year = models.IntegerField(blank=True, null=True) # IntegerField é um campo de número inteiro.
+    plate = models.CharField(max_length=10, blank=True, null=True) # CharField é um campo de texto, max_length é o tamanho máximo do texto, blank=True permite que o campo seja deixado em branco, null=True permite que o campo seja nulo.
     value = models.FloatField(blank=True, null=True) # FloatField é um campo de número decimal, blank=True permite que o campo seja deixado em branco, null=True permite que o campo seja nulo.
+    photo = models.ImageField(upload_to='cars/', blank=True, null=True) # ImageField é um campo de imagem, upload_to é o diretório onde as imagens serão armazenadas, blank=True permite que o campo seja deixado em branco, null=True permite que o campo seja nulo.
 
     def __str__(self):
         return self.model # Vai retornar o nome do modelo do carro, e não mais Car object (1), Car object (2) etc.
