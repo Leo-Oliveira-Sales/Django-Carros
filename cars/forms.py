@@ -3,15 +3,26 @@ from cars.models import Brand, Car
 
 
 class CarForm(forms.Form):
-    model = forms.CharField(max_length=200)  # Campo para o modelo do carro
-    brand = forms.ModelChoiceField(Brand.objects.all()) # Campo para selecionar a marca do carro, usando um ModelChoiceField que exibe as opções disponíveis no modelo Brand
-    factory_year = forms.IntegerField()  # Campo para o ano de fabricação do carro
-    model_year = forms.IntegerField()  # Campo para o ano do modelo do carro
-    plate = forms.CharField(max_length=10)  # Campo para a placa do carro
-    value = forms.FloatField()  # Campo para o valor do carro
-    photo = forms.ImageField()  # Campo para a foto do carro, usando um ImageField que permite o upload de arquivos de imagem
+    model = forms.CharField(max_length=200)
+    brand = forms.ModelChoiceField(Brand.objects.all()) # Retorna todos os objetos da tabela Brand.
+    factory_year = forms.IntegerField()
+    model_year = forms.IntegerField()
+    plate = forms.CharField(max_length=10)
+    value = forms.FloatField()
+    photo = forms.ImageField()
 
-
+    def save(self):
+        car = Car(
+            model=self.cleaned_data['model'],
+            brand=self.cleaned_data['brand'],
+            factory_year=self.cleaned_data['factory_year'],
+            model_year=self.cleaned_data['model_year'],
+            plate=self.cleaned_data['plate'],
+            value=self.cleaned_data['value'],
+            photo=self.cleaned_data['photo']
+        )
+        car.save()
+        return car
 
 
 # class CarModelForm(forms.ModelForm):
