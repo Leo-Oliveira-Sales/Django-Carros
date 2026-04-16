@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{% endblock %}</title>
+  <!-- Estilos CSS -->
   <style>
     body {
         font-family: 'Open Sans', sans-serif;
@@ -68,12 +69,28 @@
 
   </style>
 </head>
+<!-- navbar/menu de navegação com as opções/menus Carros e Cadastrar Carro -->
 <body>
   <header>
     <nav>
       <ul>
-          <li><a href="{% url 'cars_list' %}">Carro</a></li>
-          <li><a href="{% url 'new_car' %}">Cadastrar Carro</a></li>
+        <!-- Se tiver logado -->
+        {% if user.is_authenticated %} <!-- Verifica se o usuário está autenticado/logado -->
+            <li>Olá, {{ user.username }}</li> <!-- Exibe o nome do usuário ao logar -->
+            <li><a href="{% url 'new_car' %}">Cadastrar Carro</a></li> <!-- Exibe o menu "Cadastrar Carro" apenas para usuários logados -->
+        {% endif %}
+
+        <!-- Se não estiver logado -->
+        {% if not user.is_authenticated %} <!-- Verifica se o usuário não está autenticado/logado -->
+            <li><a href="{% url 'register' %}">Cadastre-se</a></li> <!-- Exibe o menu "Cadastre-se" apenas para usuários não logados -->
+            <li><a href="{% url 'login' %}">Login</a></li> <!-- Exibe o menu "Login" apenas para usuários não logados -->
+        {% endif %}
+
+        <li><a href="{% url 'cars_list' %}">Carro</a></li>
+        
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Sair</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>
