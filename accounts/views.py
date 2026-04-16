@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login, logout
 
 
 # Registro de usuário:
@@ -9,7 +9,7 @@ def register_view(request):
         user_form = UserCreationForm(request.POST)
         if user_form.is_valid():
             user_form.save()
-            return redirect("cars_list")  # Redireciona para a lista de carros após o registro bem-sucedido
+            return redirect("login")  # Redireciona para a página de login após o registro bem-sucedido
     else:
         user_form = UserCreationForm()
     return render(request, "register.html", {"user_form": user_form})
@@ -26,3 +26,9 @@ def login_view(request):
     else:
         login_form = AuthenticationForm()
     return render(request, "login.html", {"login_form": login_form})
+
+
+# Logout de usuário:
+def logout_view(request):
+    logout(request)
+    return redirect("cars_list")
