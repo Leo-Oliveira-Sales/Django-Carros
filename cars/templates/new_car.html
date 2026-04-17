@@ -5,7 +5,7 @@
         {% csrf_token %} <!-- Token de segurança para proteção contra CSRF --> 
         
         <table>
-            {{ new_car_form.as_table }} <!-- Renderiza o formulário usando a formatação de tabela as_table -->
+            {{ form.as_table }} <!-- Renderiza o formulário usando a formatação de tabela as_table -->
         </table>
 
         <input type="submit" value="Cadastrar"> <!-- Botão de envio do formulário -->
