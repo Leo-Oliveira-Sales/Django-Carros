@@ -1,8 +1,6 @@
-from django.shortcuts import render, redirect
 from cars.models import Car
 from cars.forms import CarModelForm
-from django.views import View
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 
 # CRUD
@@ -39,3 +37,9 @@ class CarUpdateView(UpdateView):
     form_class = CarModelForm
     template_name = "car_update.html"
     success_url = "/cars/"  # Redireciona para a lista de carros após editar um carro
+
+
+class CarDeleteView(DeleteView):
+    model = Car
+    template_name = "car_delete.html"
+    success_url = "/cars/"  # Redireciona para a lista de carros após deletar um carro

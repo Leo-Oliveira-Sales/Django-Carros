@@ -106,8 +106,9 @@
     }
 
   </style>
+
   <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+    {% csrf_token %} <!-- Adiciona o token CSRF para proteger contra ataques CSRF -->
     <h1>Editar Carro</h1>
 
     <table>
